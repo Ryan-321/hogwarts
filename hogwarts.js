@@ -38,6 +38,7 @@ House.prototype.getStudent = function(name) {
   // Adding Students
     gryffindor.addStudent(abby)
     gryffindor.addStudent(mitch)
+
 House.prototype.getOrAddStudent = function(name) {
   if(this.getStudent(name)){
     return this.getStudent(name);
@@ -46,10 +47,23 @@ House.prototype.getOrAddStudent = function(name) {
     this.addStudent(newStudent);
     return this.getStudent(name); // need return statement here
   }
-
 }
-
-
+House.prototype.awardPointsTo = function(name,points) {
+  if(this.getStudent(name)){
+    this.getStudent(name).awardPoints(points)
+  } else {
+    this.getOrAddStudent(name);
+    this.awardPointsTo(name,points);
+    return this.getStudent(name);
+  }
+}
+House.prototype.getTotalPoints = function(){
+  var tally = 0;
+  for(var i = 0; i < this.students.length; i++){
+    tally += this.students[i].points;
+  }
+  return tally;
+}
 // Create school constructor
 
   // Augment prototype
