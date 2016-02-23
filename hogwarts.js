@@ -12,7 +12,7 @@ Student.prototype.awardPoints = function(pointsEarned){
 var abby = new Student("abby")
 abby.awardPoints(8);
 var mitch = new Student("mitch")
-abby.awardPoints(3);
+mitch.awardPoints(3);
 
 // HOUSE
   //Constructor
@@ -33,11 +33,22 @@ House.prototype.getStudent = function(name) {
       return this.students[i];
     }
   }
-  return console.log("No Students Matched")
+  return null;
+}
+  // Adding Students
+    gryffindor.addStudent(abby)
+    gryffindor.addStudent(mitch)
+House.prototype.getOrAddStudent = function(name) {
+  if(this.getStudent(name)){
+    return this.getStudent(name);
+  } else {
+    var newStudent = new Student(name);
+    this.addStudent(newStudent);
+    return this.getStudent(name); // need return statement here
+  }
+
 }
 
-gryffindor.addStudent(abby)
-gryffindor.addStudent(mitch)
 
 // Create school constructor
 
